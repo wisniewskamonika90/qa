@@ -22,8 +22,11 @@ public class JunitTest {
     }
 
     @BeforeEach
-    public  void setupEach(){
+    public  void setupEach(TestInfo testInfo){
         System.out.println("==========BeforeEach=======");
+        System.out.println(testInfo.getDisplayName());
+        System.out.println(testInfo.getTags());
+        System.out.println(testInfo.getTestMethod());
     }
 
     @AfterAll
