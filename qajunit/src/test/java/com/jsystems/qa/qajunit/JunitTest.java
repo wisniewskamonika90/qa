@@ -16,6 +16,26 @@ public class JunitTest {
 
     final String stringTestowy = "stringTestowy";
 
+    @BeforeAll
+    public static void setupAll(){
+        System.out.println("==========BeforeAll=======");
+    }
+
+    @BeforeEach
+    public  void setupEach(){
+        System.out.println("==========BeforeEach=======");
+    }
+
+    @AfterAll
+    public static void tearDownAll(){
+        System.out.println("==========AfterAll=======");
+    }
+
+    @AfterEach
+    public  void tearDownEach(){
+        System.out.println("==========AfterEach=======");
+    }
+
     @DisplayName("pierwszy")
     @Test
     //@RepeatedTest(5)
