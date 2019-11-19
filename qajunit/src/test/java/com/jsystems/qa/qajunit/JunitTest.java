@@ -16,10 +16,7 @@ public class JunitTest {
 
     final String stringTestowy = "stringTestowy";
 
-    @BeforeAll
-    public static void setupAll(){
-        System.out.println("==========BeforeAll=======");
-    }
+
 
     @BeforeEach
     public  void setupEach(TestInfo testInfo){
@@ -29,10 +26,6 @@ public class JunitTest {
         System.out.println(testInfo.getTestMethod());
     }
 
-    @AfterAll
-    public static void tearDownAll(){
-        System.out.println("==========AfterAll=======");
-    }
 
     @AfterEach
     public  void tearDownEach(){
@@ -58,6 +51,15 @@ public class JunitTest {
     public void secondTest(){;
         double result = new BigDecimal("0.2").multiply(new BigDecimal("0.2")).doubleValue();
         assertTrue(result == 0.04 );
+    }
+
+    @Test
+    public void stringTest(){
+
+        String simpleString  = "simpleString";
+        String simpleString1  = new String("simpleString1");
+        assertTrue(simpleString.equals("simpleString"));
+        assertFalse(simpleString1 == "simpleString1");
     }
 
     @Nested

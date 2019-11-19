@@ -23,6 +23,11 @@
             <groupId>com.google.truth</groupId>
             <artifactId>truth</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+        </dependency>
+
     </dependencies>
 
 
