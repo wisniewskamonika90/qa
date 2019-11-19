@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Raport : Junit test")
-@Tag("unit")
+@Tag("UnitTest")
 public class JunitTest {
 
     final String stringTestowy = "stringTestowy";

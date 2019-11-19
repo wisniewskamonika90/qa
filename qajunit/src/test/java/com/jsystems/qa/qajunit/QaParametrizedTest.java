@@ -1,5 +1,6 @@
 package com.jsystems.qa.qajunit;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -8,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Tag("UnitTest")
 public class QaParametrizedTest  extends  ConfigJunit{
 
     @ParameterizedTest(name = "Parameter with {0}")
