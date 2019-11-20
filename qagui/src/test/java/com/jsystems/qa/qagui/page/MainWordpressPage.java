@@ -19,4 +19,9 @@ public class MainWordpressPage extends BasePage {
 
     @FindBy(css = "h1.lpc-headline-title span:nth-child(2)")
     public WebElement textElement2;
+
+    public static final String loginIconSelector = ".x-nav-item.x-nav-item--wide.x-nav-item--logged-in";
+    @FindBy(css = loginIconSelector)
+    public WebElement loginIcon;
+
 }

@@ -89,13 +89,12 @@ public class FrontendTest extends ConfigFrontend{
     @Test
     public void loginTest2() {
         driver.navigate().to(Configuration.BASE_URL);
-
-        WebElement loginIcon = driver.findElement(By.cssSelector(".x-nav-item.x-nav-item--wide.x-nav-item--logged-in"));
+        MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
 
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.elementToBeClickable(loginIcon));
+        wait.until(ExpectedConditions.elementToBeClickable(mainWordpressPage.loginIcon));
 
-        loginIcon.click();
+        mainWordpressPage.loginIcon.click();
 
         String usernameOrEmailSelector = "usernameOrEmail";
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(usernameOrEmailSelector)));
@@ -131,7 +130,7 @@ public class FrontendTest extends ConfigFrontend{
         WebElement userDisplayName = driver.findElement(By.cssSelector(userDisplayNameSelector));
         String userDisplayNameText = userDisplayName.getText();
 
-        assertThat(userDisplayNameText).isEqualTo("testautomation112019");
+        assertThat(userDisplayNameText).isEqualTo("monikawisniewska90");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(primaryButtonSelector)));
         WebElement saveUserDetailsButton = driver.findElement(By.cssSelector(primaryButtonSelector));
