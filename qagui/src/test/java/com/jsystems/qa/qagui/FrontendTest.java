@@ -13,9 +13,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.jsystems.qa.qagui.page.LoginPage.*;
-import static com.jsystems.qa.qagui.page.UserPage.userAvatarSelector;
-import static com.jsystems.qa.qagui.page.UserPage.userDisplayNameSelector;
+import static com.jsystems.qa.qagui.page.UserPage.*;
 import static java.lang.Thread.sleep;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Tag("FrontTest")
@@ -130,5 +130,49 @@ public class FrontendTest extends ConfigFrontend{
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(primaryButtonSelector)));
         assertThat(!userPage.userDisplay.isDisplayed());
+    }
+
+    @Test
+    public void notificationTest() {
+        driver.navigate().to(Configuration.BASE_URL);
+        MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.elementToBeClickable(mainWordpressPage.loginIcon));
+        mainWordpressPage.loginIcon.click();
+
+        LoginPage loginPage = new LoginPage(driver);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(usernameOrEmailSelector)));
+
+        loginPage.usernameInput.clear();
+        loginPage.usernameInput.sendKeys(Configuration.LOGIN);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
+        loginPage.usernameButton.click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id(passwordInputSelector)));
+        loginPage.inputPassword.clear();
+        loginPage.inputPassword.sendKeys(Configuration.PASSWORD);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
+        loginPage.usernameButton.click();
+
+        UserPage userPage = new UserPage(driver);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(userAvatarSelector)));
+        userPage.userAvatar.click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(userDisplayNameSelector)));
+
+        userPage.notificationSideLine.click();
+        userPage.comment.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(checkBoxSelector)));
+        assertTrue(userPage.checkbox.isSelected());
+
+        userPage.checkbox.click();
+        assertFalse(userPage.checkbox.isSelected());
+
+        userPage.checkbox.click();
+
     }
 }
