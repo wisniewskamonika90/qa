@@ -85,7 +85,7 @@ public class FrontendTest extends ConfigFrontend{
 
     @Test
     public void loginTest2() {
-        driver.get("https://www.wordpress.com/");
+        driver.navigate().to("https://www.wordpress.com/");
 
         WebElement loginIcon = driver.findElement(By.cssSelector(".x-nav-item.x-nav-item--wide.x-nav-item--logged-in"));
 
