@@ -163,7 +163,7 @@ public class FrontendTest extends ConfigFrontend{
         userPage.userAvatar.click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(userDisplayNameSelector)));
-
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(notificationSelection)));
         userPage.notificationSideLine.click();
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(commentSelector)));
         userPage.comment.click();
