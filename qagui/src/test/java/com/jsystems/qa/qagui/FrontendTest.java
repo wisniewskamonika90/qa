@@ -1,6 +1,7 @@
 package com.jsystems.qa.qagui;
 
-import com.sun.xml.internal.ws.api.server.WebServiceContextDelegate;
+import com.jsystems.qa.qagui.page.MainWordpressPage;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,22 +13,24 @@ import static com.google.common.truth.Truth.assertThat;
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Tag("FrontTest")
 public class FrontendTest extends ConfigFrontend{
 
 
    @Test
     public void frontTest(){
-        driver.get("https://wordpress.com/");
-        WebElement textElement1 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(1)"));
-        String text1  = textElement1.getText();
+        driver.navigate().to(Configuration.BASE_URL);
+       MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
+     //   WebElement textElement1 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(1)"));
+        String text1  = mainWordpressPage.textElement1.getText();
         assertTrue(text1.equals("WordPress powers"));
 
-       WebElement textElement2 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(2)"));
-       String text2  = textElement2.getText();
+     //  WebElement textElement2 = driver.findElement(By.cssSelector("h1.lpc-headline-title span:nth-child(2)"));
+       String text2  = mainWordpressPage.textElement2.getText();
        assertTrue(text2.contains("% of the internet."));
        assertTrue(text2.matches("\\d+(% of the internet.)"));
    }
-
+/*
    @Test
     public void loginTest(){
        driver.get("https://wordpress.com/");
@@ -82,10 +85,10 @@ public class FrontendTest extends ConfigFrontend{
            e.printStackTrace();
        }
    }
-
+*/
     @Test
     public void loginTest2() {
-        driver.navigate().to("https://www.wordpress.com/");
+        driver.navigate().to(Configuration.BASE_URL);
 
         WebElement loginIcon = driver.findElement(By.cssSelector(".x-nav-item.x-nav-item--wide.x-nav-item--logged-in"));
 
@@ -100,7 +103,7 @@ public class FrontendTest extends ConfigFrontend{
         WebElement usernameInput = driver.findElement(By.id(usernameOrEmailSelector));
 
         usernameInput.clear();
-        usernameInput.sendKeys("testautomation112019@wp.pl");
+        usernameInput.sendKeys(Configuration.LOGIN);
 
         String primaryButtonSelector = ".button.form-button.is-primary";
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
@@ -111,7 +114,7 @@ public class FrontendTest extends ConfigFrontend{
         WebElement inputPassword = driver.findElement(By.id("password"));
 
         inputPassword.clear();
-        inputPassword.sendKeys("testautomation");
+        inputPassword.sendKeys(Configuration.PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
         WebElement buttonPassword = driver.findElement(By.cssSelector(primaryButtonSelector));
         usernameButton.click();

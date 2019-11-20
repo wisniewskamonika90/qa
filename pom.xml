@@ -18,7 +18,7 @@
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <tags>UnitTest, ApiTest</tags>
+        <tags>UnitTest, ApiTest, FrontTest</tags>
     </properties>
 
     <dependencyManagement>
@@ -60,6 +60,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>27.1-jre</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>config</artifactId>
+            <version>1.4.0</version>
         </dependency>
 
 

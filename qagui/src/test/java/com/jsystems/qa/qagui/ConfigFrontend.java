@@ -40,7 +40,13 @@ public class ConfigFrontend {
 //        System.setProperty("webdriver.chrome.driver", chromePath);
         System.setProperty("webdriver.gecko.driver", fireFoxPath);
 
-        driver = new FirefoxDriver();
+      //  driver = new FirefoxDriver();
+
+        if(Configuration.BROWSER.equals("chrome")){
+            driver = new ChromeDriver();
+        } else {
+            driver = new FirefoxDriver();
+        }
 
         setupDriver();
 //        DesiredCapabilities cap = DesiredCapabilities.chrome();
