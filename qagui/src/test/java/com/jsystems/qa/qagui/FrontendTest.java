@@ -165,14 +165,17 @@ public class FrontendTest extends ConfigFrontend{
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(userDisplayNameSelector)));
 
         userPage.notificationSideLine.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(commentSelector)));
         userPage.comment.click();
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(checkBoxSelector)));
+
         assertTrue(userPage.checkbox.isSelected());
-
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(checkBoxSelector)));
-        userPage.checkbox.click();
-        assertFalse(userPage.checkbox.isSelected());
 
+        userPage.checkbox.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(checkBoxSelector)));
+        assertFalse(userPage.checkbox.isSelected());
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(checkBoxSelector)));
         userPage.checkbox.click();
 
     }
