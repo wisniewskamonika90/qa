@@ -92,54 +92,53 @@ public class FrontendTest extends ConfigFrontend{
    }
 */
     @Test
-    public void loginTest2() {
-        driver.navigate().to(Configuration.BASE_URL);
-        MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
+        public void loginTest2() {
+            driver.navigate().to(Configuration.BASE_URL);
+            MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
 
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.elementToBeClickable(mainWordpressPage.loginIcon));
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.elementToBeClickable(mainWordpressPage.loginIcon));
+            mainWordpressPage.loginIcon.click();
 
-        mainWordpressPage.loginIcon.click();
+            LoginPage loginPage = new LoginPage(driver);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(usernameOrEmailSelector)));
 
-        LoginPage loginPage = new LoginPage(driver);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(usernameOrEmailSelector)));
+            loginPage.usernameInput.clear();
+            loginPage.usernameInput.sendKeys(Configuration.LOGIN);
 
-        loginPage.usernameInput.clear();
-        loginPage.usernameInput.sendKeys(Configuration.LOGIN);
+            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
+            loginPage.usernameButton.click();
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
-        loginPage.usernameButton.click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.id(passwordInputSelector)));
+            loginPage.inputPassword.clear();
+            loginPage.inputPassword.sendKeys(Configuration.PASSWORD);
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.id(passwordInputSelector)));
-        loginPage.inputPassword.clear();
-        loginPage.inputPassword.sendKeys(Configuration.PASSWORD);
+            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
+            loginPage.usernameButton.click();
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(primaryButtonSelector)));
-        loginPage.usernameButton.click();
+            UserPage userPage = new UserPage(driver);
 
-        UserPage userPage = new UserPage(driver);
-
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(userAvatarSelector)));
-        userPage.userAvatar.click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(userAvatarSelector)));
+            userPage.userAvatar.click();
 
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(userDisplayNameSelector)));
-        String userDisplayNameText = userPage.userDisplay.getText();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(userDisplayNameSelector)));
+            String userDisplayNameText = userPage.userDisplay.getText();
 
-        assertThat(userDisplayNameText).isEqualTo("monikawisniewska90");
+            assertThat(userDisplayNameText).isEqualTo("monikawisniewska90");
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(primaryButtonSelector)));
-        assertThat(!userPage.userDisplay.isDisplayed());
-    }
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(primaryButtonSelector)));
+            assertThat(!userPage.userDisplay.isDisplayed());
+        }
 
-    @Test
-    public void notificationTest() {
-        driver.navigate().to(Configuration.BASE_URL);
-        MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
+        @Test
+        public void notificationTest() {
+            driver.navigate().to(Configuration.BASE_URL);
+            MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
 
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.elementToBeClickable(mainWordpressPage.loginIcon));
-        mainWordpressPage.loginIcon.click();
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.elementToBeClickable(mainWordpressPage.loginIcon));
+            mainWordpressPage.loginIcon.click();
 
         LoginPage loginPage = new LoginPage(driver);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(usernameOrEmailSelector)));
@@ -178,5 +177,53 @@ public class FrontendTest extends ConfigFrontend{
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(checkBoxSelector)));
         userPage.checkbox.click();
 
+    }
+
+    @Test
+    public void notificationTestShort() {
+        driver.navigate().to(Configuration.BASE_URL);
+        MainWordpressPage mainWordpressPage = new MainWordpressPage(driver);
+
+        mainWordpressPage.waitForElementToBeClicable(mainWordpressPage.loginIcon);
+        mainWordpressPage.loginIcon.click();
+
+        LoginPage loginPage = new LoginPage(driver);
+        mainWordpressPage.waitForElementToBeVisibility(By.id(usernameOrEmailSelector));
+
+        loginPage.usernameInput.clear();
+        loginPage.usernameInput.sendKeys(Configuration.LOGIN);
+
+        mainWordpressPage.waitForElementToBeVisibility(By.cssSelector(primaryButtonSelector));
+        loginPage.usernameButton.click();
+
+        mainWordpressPage.waitForElementToBeClicable(By.id(passwordInputSelector));
+        loginPage.inputPassword.clear();
+        loginPage.inputPassword.sendKeys(Configuration.PASSWORD);
+
+        mainWordpressPage.waitForElementToBeClicable(By.cssSelector(primaryButtonSelector));
+        loginPage.usernameButton.click();
+
+        UserPage userPage = new UserPage(driver);
+
+        mainWordpressPage.waitForElementToBeClicable(By.cssSelector(userAvatarSelector));
+        userPage.userAvatar.click();
+
+        mainWordpressPage.waitForElementToBeVisibility(By.cssSelector(userDisplayNameSelector));
+/*
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(notificationSelection)));
+        userPage.notificationSideLine.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(commentSelector)));
+        userPage.comment.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(checkBoxSelector)));
+
+        assertTrue(userPage.checkbox.isSelected());
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(checkBoxSelector)));
+
+        userPage.checkbox.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(checkBoxSelector)));
+        assertFalse(userPage.checkbox.isSelected());
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(checkBoxSelector)));
+        userPage.checkbox.click();
+*/
     }
 }
