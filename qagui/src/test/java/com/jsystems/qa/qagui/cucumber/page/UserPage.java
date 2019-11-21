@@ -1,11 +1,11 @@
-package com.jsystems.qa.qagui.page;
+package com.jsystems.qa.qagui.cucumber.page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class UserPage extends BasePage{
+public class UserPage extends BasePage {
 
     public UserPage(WebDriver driver) {
         super(driver);
@@ -31,4 +31,8 @@ public class UserPage extends BasePage{
     public static final String checkBoxSelector = "div.notification-settings-form .notification-settings-form__streams .notification-settings-form-stream:nth-child(2) ul li:nth-child(1) input";
     @FindBy(css = checkBoxSelector)
     public WebElement checkbox;
+
+    public static final String primaryButtonSelector = ".button.form-button.is-primary";
+    @FindBy(css = primaryButtonSelector)
+    public WebElement saveUserDetailsButton;
 }
