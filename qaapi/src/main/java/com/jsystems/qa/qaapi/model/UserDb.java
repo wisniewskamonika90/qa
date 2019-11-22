@@ -38,5 +38,12 @@ public class UserDb {
         this.surname = surname;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserDb{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
+    }
 }

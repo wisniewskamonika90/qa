@@ -8,6 +8,7 @@ import com.jsystems.qa.qaapi.model.azure.Book;
 import com.jsystems.qa.qaapi.service.BookService;
 import com.jsystems.qa.qaapi.service.UserService;
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -85,8 +86,27 @@ public class ApiTest {
     }
 
     @Test
+    @Disabled
     public void dbTest() {
         UserDb userDb = UserDao.getOneById(1L);
         assertThat(userDb.getName()).isEqualTo("Piotr");
+    }
+
+    @Test
+    @Disabled
+    public void getAll(){
+        List<UserDb> users = UserDao.getAllUsers();
+        assertThat(users.size()).isGreaterThan(0);
+        System.out.println(users.toString());
+    }
+
+    @Test
+    public void  save(){
+        UserDb userDb = new UserDb(5L, "Monika5", "Moonika5");
+        UserDao.saveUser(userDb);
+
+        UserDb user_1 = UserDao.getOneById(5L);
+        assertTrue(user_1.getId() == userDb.getId());
+        UserDao.deleteUser(user_1.getId());
     }
 }
