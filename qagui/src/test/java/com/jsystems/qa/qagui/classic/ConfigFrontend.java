@@ -5,12 +5,16 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
@@ -42,12 +46,14 @@ public class ConfigFrontend {
         System.setProperty("webdriver.gecko.driver", fireFoxPath);
 
       //  driver = new FirefoxDriver();
-
-        if(Configuration.BROWSER.equals("chrome")){
-            driver = new ChromeDriver();
-        } else {
-            driver = new FirefoxDriver();
+        if(Configuration.MACHINE.equals("local")) {
+            setUpLocalDriver();
         }
+        else {
+            setUpRemoteDriver();
+        }
+
+
 
         setupDriver();
 //        DesiredCapabilities cap = DesiredCapabilities.chrome();
@@ -65,6 +71,35 @@ public class ConfigFrontend {
 //        } catch (MalformedURLException e) {
 //            e.printStackTrace();
 //        }
+    }
+
+    private void setUpLocalDriver() {
+        setupSystemProperties();
+        if(Configuration.BROWSER.equals("firefox")) {
+            driver = new FirefoxDriver();
+        } else {
+            driver = new ChromeDriver();
+        }
+    }
+
+    private void setUpRemoteDriver() {
+        DesiredCapabilities cap;
+
+        if(Configuration.BROWSER.equals("firefox")) {
+            cap = DesiredCapabilities.firefox();
+        } else {
+            cap = DesiredCapabilities.chrome();
+        }
+
+        cap.setPlatform(Platform.LINUX);
+        cap.setVersion("");
+
+        driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL(Configuration.REMOTE_URL), cap);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     @AfterEach

@@ -11,6 +11,7 @@ public class Configuration {
 
     public static final String BROWSER = CONFIG.getString("browser");
     public  static final  String MACHINE = CONFIG.getString("machine");
+    public static final String REMOTE_URL = CONFIG.getString("remoteUrl");
 
     public static final String BASE_URL = ENV.getString("baseUrl");
     public static final String LOGIN = ENV.getString("login");
