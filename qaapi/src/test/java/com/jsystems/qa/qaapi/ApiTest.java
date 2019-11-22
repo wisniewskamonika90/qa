@@ -1,6 +1,8 @@
 package com.jsystems.qa.qaapi;
 
+import com.jsystems.qa.qaapi.database.UserDao;
 import com.jsystems.qa.qaapi.model.User;
+import com.jsystems.qa.qaapi.model.UserDb;
 import com.jsystems.qa.qaapi.model.azure.AzureAuthor;
 import com.jsystems.qa.qaapi.model.azure.Book;
 import com.jsystems.qa.qaapi.service.BookService;
@@ -80,5 +82,11 @@ public class ApiTest {
         Book book = new Book(1, "title", "description",5,"excert", "2019-11-22T09:14:44.376Z");
 
         BookService.addBook(book, 200);
+    }
+
+    @Test
+    public void dbTest() {
+        UserDb userDb = UserDao.getOneById(1L);
+        assertThat(userDb.getName()).isEqualTo("Piotr");
     }
 }

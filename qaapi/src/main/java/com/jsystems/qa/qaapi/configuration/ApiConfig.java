@@ -5,7 +5,7 @@ import com.typesafe.config.Config;
 
 public class ApiConfig {
 
-    private static final Config CONFIG = ConfigFactory.load("configApi.conf");
+    private static final Config CONFIG = ConfigFactory.load("config.conf");
     private static final String ENVIRONMENT = CONFIG.getString("environment");
     private static final Config ENV = CONFIG.getConfig("environments").getConfig(ENVIRONMENT);
     public static final String BASE_URL = ENV.getString("baseUrl");
