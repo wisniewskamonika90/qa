@@ -1,6 +1,9 @@
 package com.jsystems.qa.qaapi;
 
 import com.jsystems.qa.qaapi.model.User;
+import com.jsystems.qa.qaapi.model.azure.AzureAuthor;
+import com.jsystems.qa.qaapi.model.azure.Book;
+import com.jsystems.qa.qaapi.service.BookService;
 import com.jsystems.qa.qaapi.service.UserService;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -54,5 +58,27 @@ public class ApiTest {
       assertTrue(users.get(0).device.get(0).type.equals("computer"));
       assertTrue(users.get(0).device.get(0).deviceModel.get(0).screenSize ==17);
       assertTrue(users.size()>0);
+    }
+
+    @Test
+    @DisplayName("get azure authors")
+    public void shouldReturnAllAzureAuthors(){
+        List<AzureAuthor> authors = UserService.getAzureAuthors();
+        assertThat(authors.size()).isGreaterThan(0);
+
+        for (AzureAuthor author: authors) {
+            int firstNameId = Integer.parseInt(author.firstName.replace("First Name ", ""));
+            assertThat(author.firstName).matches("First Name \\d*");
+            assertTrue(author.id == firstNameId);
+
+        }
+    }
+
+    @Test
+    @DisplayName("post books")
+    public void addBook(){
+        Book book = new Book(1, "title", "description",5,"excert", "2019-11-22T09:14:44.376Z");
+
+        BookService.addBook(book, 200);
     }
 }

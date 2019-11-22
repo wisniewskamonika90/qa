@@ -12,7 +12,8 @@
     <artifactId>qaapi</artifactId>
 
     <properties>
-        <tags>UnitTest</tags>
+        <tags>ApiTest</tags>
+        <exTags></exTags>
     </properties>
 
     <dependencies>
